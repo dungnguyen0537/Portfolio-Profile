@@ -11,7 +11,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&family=Titillium+Web:wght@200;300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&family=Titillium+Web:wght@200;300;400;600;700&family=Share+Tech+Mono&family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- AOS Animation Library -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <!-- GSAP for advanced animations -->
@@ -1818,6 +1818,446 @@
                 font-size: 0.9rem;
             }
         }
+
+        /* ===== DShinee Zone Music Section ===== */
+        .music-section { padding-bottom: 140px; }
+
+        .music-search-wrapper {
+            max-width: 500px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+        .music-search-wrapper i {
+            position: absolute; left: 18px; top: 50%; transform: translateY(-50%);
+            color: var(--accent-cyan); font-size: 1rem; pointer-events: none;
+        }
+        .music-search {
+            width: 100%; padding: 14px 20px 14px 48px;
+            background: rgba(21, 21, 37, 0.8); border: 1px solid rgba(0, 255, 213, 0.2);
+            border-radius: 30px; color: var(--text-light); font-size: 1rem;
+            font-family: 'Share Tech Mono', monospace; outline: none;
+            transition: var(--transition);
+        }
+        .music-search:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 213, 0.15);
+        }
+        .music-search::placeholder { color: rgba(255,255,255,0.3); }
+
+        .music-track-list {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 12px; max-height: 600px; overflow-y: auto;
+            padding-right: 8px; scrollbar-width: thin; scrollbar-color: var(--accent-red) transparent;
+        }
+        .music-track-list::-webkit-scrollbar { width: 6px; }
+        .music-track-list::-webkit-scrollbar-track { background: transparent; }
+        .music-track-list::-webkit-scrollbar-thumb {
+            background: var(--gradient-primary); border-radius: 10px;
+        }
+
+        .music-track {
+            display: flex; align-items: center; gap: 14px;
+            padding: 12px 16px; border-radius: 10px;
+            background: rgba(21, 21, 37, 0.6); border: 1px solid rgba(255,255,255,0.04);
+            cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden;
+        }
+        .music-track::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(227,27,84,0.08), rgba(0,255,213,0.05));
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .music-track:hover::before, .music-track.active::before { opacity: 1; }
+        .music-track:hover {
+            border-color: rgba(0, 255, 213, 0.2);
+            transform: translateX(4px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .music-track.active {
+            border-color: var(--accent-red);
+            box-shadow: 0 0 20px rgba(227, 27, 84, 0.2);
+        }
+
+        .music-track-num {
+            min-width: 28px; text-align: center;
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--text-muted); font-size: 0.9rem;
+        }
+        .music-track.active .music-track-num { display: none; }
+
+        .music-eq {
+            display: none; align-items: flex-end; gap: 2px;
+            min-width: 28px; height: 18px; justify-content: center;
+        }
+        .music-track.active .music-eq { display: flex; }
+        .music-eq-bar {
+            width: 3px; background: var(--accent-red); border-radius: 2px;
+            animation: eqBounce 0.8s ease-in-out infinite alternate;
+        }
+        .music-eq-bar:nth-child(1) { height: 60%; animation-delay: 0s; }
+        .music-eq-bar:nth-child(2) { height: 100%; animation-delay: 0.2s; }
+        .music-eq-bar:nth-child(3) { height: 40%; animation-delay: 0.4s; }
+        .music-eq-bar:nth-child(4) { height: 80%; animation-delay: 0.1s; }
+        @keyframes eqBounce {
+            0% { transform: scaleY(0.3); } 100% { transform: scaleY(1); }
+        }
+        .music-track.paused .music-eq-bar { animation-play-state: paused; }
+
+        .music-track-thumb {
+            width: 48px; height: 48px; border-radius: 6px;
+            object-fit: cover; flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            transition: box-shadow 0.3s;
+        }
+        .music-track:hover .music-track-thumb,
+        .music-track.active .music-track-thumb {
+            box-shadow: 0 0 15px rgba(227,27,84,0.3);
+        }
+        .music-track-info { flex: 1; min-width: 0; position: relative; z-index: 1; }
+        .music-track-title {
+            font-weight: 500; font-size: 1rem; color: var(--text-light);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            transition: color 0.3s;
+        }
+        .music-track.active .music-track-title { color: var(--accent-red); }
+        .music-track-artist {
+            font-size: 0.85rem; color: var(--text-muted);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+
+        /* Bottom Player Bar */
+        .music-player-bar {
+            position: fixed; bottom: -100px; left: 0; right: 0;
+            height: 90px; z-index: 9990;
+            background: rgba(10, 10, 17, 0.95);
+            backdrop-filter: blur(20px); border-top: 1px solid rgba(227,27,84,0.2);
+            display: flex; align-items: center; padding: 0 24px; gap: 20px;
+            transition: bottom 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 -5px 30px rgba(0,0,0,0.5);
+        }
+        .music-player-bar.visible { bottom: 0; }
+
+        .player-track-info {
+            display: flex; align-items: center; gap: 14px;
+            min-width: 220px; max-width: 30%;
+        }
+        .player-thumb {
+            width: 56px; height: 56px; border-radius: 8px;
+            object-fit: cover; box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            animation: thumbPulse 3s ease-in-out infinite;
+        }
+        @keyframes thumbPulse {
+            0%, 100% { box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
+            50% { box-shadow: 0 4px 25px rgba(227,27,84,0.3); }
+        }
+        .player-song-name {
+            font-weight: 600; font-size: 0.95rem; color: white;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .player-song-artist {
+            font-size: 0.8rem; color: var(--text-muted);
+        }
+
+        .player-controls {
+            display: flex; flex-direction: column; align-items: center;
+            flex: 1; gap: 4px;
+        }
+        .player-buttons { display: flex; align-items: center; gap: 20px; }
+        .player-btn {
+            background: none; border: none; color: var(--text-muted);
+            font-size: 1.2rem; cursor: pointer; transition: all 0.2s;
+            padding: 6px; display: flex; align-items: center; justify-content: center;
+        }
+        .player-btn:hover { color: white; transform: scale(1.15); }
+        .player-btn-play {
+            width: 42px; height: 42px; border-radius: 50%;
+            background: var(--gradient-primary); color: white;
+            font-size: 1.1rem; box-shadow: 0 0 20px var(--accent-glow);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .player-btn-play:hover {
+            transform: scale(1.1); box-shadow: 0 0 30px var(--accent-glow);
+            color: white;
+        }
+
+        .player-progress-wrap {
+            display: flex; align-items: center; gap: 10px; width: 100%; max-width: 600px;
+        }
+        .player-time {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem; color: var(--text-muted); min-width: 40px;
+        }
+        .player-time.right { text-align: right; }
+        .player-progress-bar {
+            flex: 1; height: 4px; background: rgba(255,255,255,0.1);
+            border-radius: 4px; cursor: pointer; position: relative;
+            transition: height 0.15s;
+        }
+        .player-progress-bar:hover { height: 6px; }
+        .player-progress-fill {
+            height: 100%; border-radius: 4px;
+            background: var(--gradient-primary); position: relative;
+            width: 0%; transition: none;
+        }
+        .player-progress-fill::after {
+            content: ''; position: absolute; right: -5px; top: 50%;
+            transform: translateY(-50%); width: 12px; height: 12px;
+            background: white; border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-glow);
+            opacity: 0; transition: opacity 0.15s;
+        }
+        .player-progress-bar:hover .player-progress-fill::after { opacity: 1; }
+
+        .player-volume {
+            display: flex; align-items: center; gap: 8px; min-width: 140px;
+        }
+        .player-volume i { color: var(--text-muted); font-size: 1rem; cursor: pointer; }
+        .player-volume i:hover { color: white; }
+        .player-vol-bar {
+            flex: 1; height: 4px; background: rgba(255,255,255,0.1);
+            border-radius: 4px; cursor: pointer; position: relative;
+        }
+        .player-vol-fill {
+            height: 100%; width: 80%; background: var(--gradient-cyber);
+            border-radius: 4px;
+        }
+
+        .music-no-results {
+            text-align: center; padding: 40px; color: var(--text-muted);
+            font-family: 'Share Tech Mono', monospace; display: none;
+        }
+
+        @media (max-width: 767px) {
+            .music-track-list { grid-template-columns: 1fr; max-height: 500px; }
+            .music-section { padding-bottom: 120px; }
+            .player-track-info { min-width: 100px; max-width: 35%; }
+            .player-track-info .player-text { display: block; }
+            .player-thumb { width: 44px; height: 44px; }
+            .player-volume { display: none; }
+            .player-progress-wrap { max-width: none; }
+            .music-player-bar { padding: 0 12px; gap: 10px; height: 80px; }
+            .player-btn-play { width: 36px; height: 36px; font-size: 0.9rem; }
+            .player-buttons { gap: 14px; }
+        }
+        @media (max-width: 480px) {
+            .music-search-wrapper { margin-bottom: 24px; }
+            .music-track { padding: 10px 12px; gap: 10px; }
+            .music-track-thumb { width: 40px; height: 40px; }
+            .player-song-name { font-size: 0.8rem; }
+        }
+
+        /* Vietnamese font overrides for Music section */
+        .music-section,
+        .music-section .section-title p,
+        .music-track-title, .music-track-artist,
+        .music-search, .music-no-results,
+        .player-song-name, .player-song-artist,
+        .music-player-bar { font-family: 'Be Vietnam Pro', 'Rajdhani', sans-serif; }
+        .music-section .section-title h2 { font-family: 'Chakra Petch', 'Orbitron', sans-serif; }
+
+        /* ===== Vinyl Disc Player Overlay ===== */
+        .vinyl-overlay {
+            position: fixed; inset: 0; z-index: 99999;
+            background: rgba(5, 5, 15, 0.95); backdrop-filter: blur(30px);
+            display: none; opacity: 0; transition: opacity 0.4s ease;
+        }
+        .vinyl-overlay.active { display: flex; opacity: 1; }
+        .vinyl-overlay-inner {
+            display: flex; width: 100%; height: 100%; overflow: hidden;
+        }
+
+        /* Left panel - disc */
+        .vinyl-left {
+            flex: 1; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; padding: 40px;
+            position: relative; min-width: 0;
+        }
+        .vinyl-close {
+            position: absolute; top: 20px; right: 20px;
+            background: none; border: 1px solid rgba(255,255,255,0.15);
+            color: white; width: 44px; height: 44px; border-radius: 50%;
+            font-size: 1.2rem; cursor: pointer; transition: all 0.3s;
+            display: flex; align-items: center; justify-content: center; z-index: 2;
+        }
+        .vinyl-close:hover {
+            background: var(--accent-red); border-color: var(--accent-red);
+            transform: rotate(90deg);
+        }
+
+        .vinyl-disc-container {
+            position: relative; width: 320px; height: 320px; margin-bottom: 30px;
+        }
+        .vinyl-disc {
+            width: 100%; height: 100%; border-radius: 50%;
+            background: conic-gradient(from 0deg, #111 0%, #222 10%, #111 20%, #1a1a1a 30%, #222 40%, #111 50%, #1a1a1a 60%, #222 70%, #111 80%, #1a1a1a 90%, #111 100%);
+            box-shadow: 0 0 60px rgba(227, 27, 84, 0.3), 0 0 120px rgba(0,0,0,0.5), inset 0 0 80px rgba(0,0,0,0.5);
+            display: flex; align-items: center; justify-content: center;
+            position: relative; border: 3px solid rgba(255,255,255,0.08);
+        }
+        .vinyl-disc.spinning { animation: vinylSpin 3s linear infinite; }
+        .vinyl-disc.paused { animation-play-state: paused; }
+        @keyframes vinylSpin { 100% { transform: rotate(360deg); } }
+
+        .vinyl-disc::before {
+            content: ''; position: absolute; inset: 15px; border-radius: 50%;
+            background: repeating-radial-gradient(circle at center,
+                transparent 0px, transparent 3px, rgba(255,255,255,0.03) 3px, rgba(255,255,255,0.03) 4px
+            );
+            z-index: 1; pointer-events: none;
+        }
+        .vinyl-disc::after {
+            content: ''; position: absolute; width: 20px; height: 20px;
+            background: radial-gradient(circle, #444 0%, #222 60%, #111 100%);
+            border-radius: 50%; z-index: 3;
+            box-shadow: 0 0 8px rgba(0,0,0,0.8);
+        }
+
+        .vinyl-art {
+            width: 130px; height: 130px; border-radius: 50%;
+            object-fit: cover; z-index: 2;
+            box-shadow: 0 0 20px rgba(0,0,0,0.6);
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        /* Tonearm */
+        .vinyl-arm {
+            position: absolute; top: -10px; right: 60px; width: 120px; height: 180px;
+            z-index: 5; pointer-events: none;
+        }
+        .vinyl-arm-line {
+            position: absolute; top: 10px; right: 0; width: 4px; height: 130px;
+            background: linear-gradient(to bottom, #666, #333);
+            border-radius: 2px; transform-origin: top right;
+            transform: rotate(-25deg); transition: transform 0.5s ease;
+        }
+        .vinyl-disc.spinning ~ .vinyl-arm .vinyl-arm-line { transform: rotate(-5deg); }
+        .vinyl-arm-pivot {
+            position: absolute; top: 0; right: -6px; width: 16px; height: 16px;
+            background: radial-gradient(circle, #888, #444);
+            border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+        .vinyl-arm-head {
+            position: absolute; bottom: -8px; left: -4px; width: 12px; height: 20px;
+            background: linear-gradient(to bottom, #999, #555);
+            border-radius: 2px 2px 4px 4px;
+        }
+
+        .vinyl-now-info { text-align: center; max-width: 400px; }
+        .vinyl-now-title {
+            font-family: 'Be Vietnam Pro', sans-serif; font-weight: 600;
+            font-size: 1.5rem; color: white; margin-bottom: 6px;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .vinyl-now-artist {
+            font-family: 'Be Vietnam Pro', sans-serif; font-weight: 300;
+            font-size: 1rem; color: var(--text-muted);
+        }
+
+        .vinyl-controls {
+            display: flex; align-items: center; gap: 24px; margin-top: 28px;
+        }
+        .vinyl-ctrl-btn {
+            background: none; border: none; color: var(--text-muted);
+            font-size: 1.4rem; cursor: pointer; transition: all 0.2s; padding: 8px;
+        }
+        .vinyl-ctrl-btn:hover { color: white; transform: scale(1.15); }
+        .vinyl-ctrl-play {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: var(--gradient-primary); color: white; font-size: 1.3rem;
+            box-shadow: 0 0 30px var(--accent-glow);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .vinyl-ctrl-play:hover { transform: scale(1.1); box-shadow: 0 0 40px var(--accent-glow); color: white; }
+
+        .vinyl-progress {
+            display: flex; align-items: center; gap: 12px; width: 100%;
+            max-width: 400px; margin-top: 20px;
+        }
+        .vinyl-progress-time {
+            font-family: 'Share Tech Mono', monospace; font-size: 0.8rem;
+            color: var(--text-muted); min-width: 40px;
+        }
+        .vinyl-progress-bar {
+            flex: 1; height: 4px; background: rgba(255,255,255,0.1);
+            border-radius: 4px; cursor: pointer; position: relative;
+        }
+        .vinyl-progress-bar:hover { height: 6px; }
+        .vinyl-progress-fill {
+            height: 100%; background: var(--gradient-primary); border-radius: 4px;
+            width: 0%; transition: none; position: relative;
+        }
+        .vinyl-progress-fill::after {
+            content: ''; position: absolute; right: -6px; top: 50%;
+            transform: translateY(-50%); width: 12px; height: 12px;
+            background: white; border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-glow);
+            opacity: 0; transition: opacity 0.15s;
+        }
+        .vinyl-progress-bar:hover .vinyl-progress-fill::after { opacity: 1; }
+
+        /* Right panel - playlist sidebar */
+        .vinyl-right {
+            width: 360px; background: rgba(15, 15, 30, 0.9);
+            border-left: 1px solid rgba(227, 27, 84, 0.15);
+            display: flex; flex-direction: column; overflow: hidden;
+        }
+        .vinyl-playlist-header {
+            padding: 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.06);
+            font-family: 'Chakra Petch', sans-serif; font-weight: 600;
+            font-size: 1.1rem; color: white; letter-spacing: 1px;
+            text-transform: uppercase; flex-shrink: 0;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .vinyl-playlist-header i { color: var(--accent-cyan); }
+        .vinyl-playlist {
+            flex: 1; overflow-y: auto; padding: 8px 0;
+            scrollbar-width: thin; scrollbar-color: var(--accent-red) transparent;
+        }
+        .vinyl-playlist::-webkit-scrollbar { width: 4px; }
+        .vinyl-playlist::-webkit-scrollbar-thumb { background: var(--accent-red); border-radius: 4px; }
+
+        .vinyl-pl-item {
+            display: flex; align-items: center; gap: 12px;
+            padding: 10px 24px; cursor: pointer; transition: background 0.2s;
+            border-left: 3px solid transparent;
+        }
+        .vinyl-pl-item:hover { background: rgba(255,255,255,0.04); }
+        .vinyl-pl-item.active {
+            background: rgba(227, 27, 84, 0.1);
+            border-left-color: var(--accent-red);
+        }
+        .vinyl-pl-item-num {
+            min-width: 24px; font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8rem; color: var(--text-muted); text-align: center;
+        }
+        .vinyl-pl-item.active .vinyl-pl-item-num { color: var(--accent-red); }
+        .vinyl-pl-item-thumb {
+            width: 38px; height: 38px; border-radius: 4px;
+            object-fit: cover; flex-shrink: 0;
+        }
+        .vinyl-pl-item-info { flex: 1; min-width: 0; }
+        .vinyl-pl-item-title {
+            font-family: 'Be Vietnam Pro', sans-serif; font-size: 0.9rem;
+            color: var(--text-light); white-space: nowrap;
+            overflow: hidden; text-overflow: ellipsis;
+        }
+        .vinyl-pl-item.active .vinyl-pl-item-title { color: var(--accent-red); }
+        .vinyl-pl-item-artist {
+            font-family: 'Be Vietnam Pro', sans-serif; font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 767px) {
+            .vinyl-overlay-inner { flex-direction: column; }
+            .vinyl-right { width: 100%; height: 45%; border-left: none; border-top: 1px solid rgba(227,27,84,0.15); }
+            .vinyl-left { padding: 20px; }
+            .vinyl-disc-container { width: 200px; height: 200px; margin-bottom: 16px; }
+            .vinyl-art { width: 80px; height: 80px; }
+            .vinyl-now-title { font-size: 1.1rem; }
+            .vinyl-controls { gap: 18px; margin-top: 16px; }
+            .vinyl-ctrl-play { width: 46px; height: 46px; font-size: 1.1rem; }
+            .vinyl-progress { max-width: 300px; margin-top: 12px; }
+            .vinyl-arm { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -1879,6 +2319,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#resume" data-text="Resume">Resume</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#music" data-text="Music">Music</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact" data-text="Contact">Contact</a>
@@ -2360,6 +2803,214 @@
         </div>
     </section>
 
+    <!-- Terminal Section Divider -->
+    <div class="terminal-divider">
+        <div class="terminal-line"></div>
+        <div class="terminal-commands">cd ./music_zone --play</div>
+    </div>
+
+    <!-- DShinee Zone Music Section -->
+    <section id="music" class="section music-section">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2 class="glitch-effect" data-text="DShinee Zone Music">DShinee Zone Music</h2>
+                <p>My curated playlist — vibes for coding, chilling, and everything in between.</p>
+            </div>
+
+            <div class="music-search-wrapper" data-aos="fade-up" data-aos-delay="100">
+                <i class="fas fa-search"></i>
+                <input type="text" class="music-search" id="musicSearchInput" placeholder="Search tracks...">
+            </div>
+
+            <div class="music-track-list" id="musicTrackList" data-aos="fade-up" data-aos-delay="200">
+                <div class="music-track" data-src="https://www.dropbox.com/scl/fi/8eywm3m0o5cyxtalputnf/C-D-U-C-A-NG-I-TA.mp3?rlkey=rfz32hiyvoa32o6bf1x6d9j23&st=pxhenomv&raw=1" data-img="https://i.postimg.cc/rwNfzVSJ/IMG-1680.jpg">
+                    <span class="music-track-num">01</span>
+                    <div class="music-eq"><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div></div>
+                    <img class="music-track-thumb" src="https://i.postimg.cc/rwNfzVSJ/IMG-1680.jpg" alt="">
+                    <div class="music-track-info"><div class="music-track-title">Cô Dâu Của Người Ta Hiếu Béo Mix</div><div class="music-track-artist">Hiếu Béo Mix</div></div>
+                </div>
+                <div class="music-track" data-src="https://www.dropbox.com/scl/fi/ewnnnm7bgqkvrl0xjk7gt/C-M-i-N-i-C-Remix-HuyN-ft-Tr-ng-Alex.mp3?rlkey=ukiy5gkhodhd9kws8jkurq5no&st=ckbr8ohp&raw=1" data-img="https://i.postimg.cc/hPxyWbvN/IMG-1679.jpg">
+                    <span class="music-track-num">02</span>
+                    <div class="music-eq"><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div></div>
+                    <img class="music-track-thumb" src="https://i.postimg.cc/hPxyWbvN/IMG-1679.jpg" alt="">
+                    <div class="music-track-info"><div class="music-track-title">Có Mới Nới Cũ Remix</div><div class="music-track-artist">HuyN ft Trường Alex</div></div>
+                </div>
+                <div class="music-track" data-src="https://www.dropbox.com/scl/fi/h294ayfawpp0cflqdzgkh/NG-N-I-X-KHO-LY-BI-T-Hi-u-B-o-remix.mp3?rlkey=biw9cglegtf0ivlmrhevia2nf&st=dgaq9jd4&raw=1" data-img="https://i.postimg.cc/hhFd1mqd/IMG-1677.jpg">
+                    <span class="music-track-num">03</span>
+                    <div class="music-eq"><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div></div>
+                    <img class="music-track-thumb" src="https://i.postimg.cc/hhFd1mqd/IMG-1677.jpg" alt="">
+                    <div class="music-track-info"><div class="music-track-title">Đừng Nói x Khoá Biệt Ly</div><div class="music-track-artist">Hiếu Béo Remix</div></div>
+                </div>
+                <div class="music-track" data-src="https://www.dropbox.com/scl/fi/1xddvfsm7r0th24g4zhn8/Final-S-ng-Xa-Anh-Ch-ng-D-D-ng-ViPer-ft-Hi-u-B-o.mp3?rlkey=wcybowqdy4fd0wikqdlljznnv&st=4jauziev&raw=1" data-img="https://i.postimg.cc/KzHL4VqQ/IMG-1674.jpg">
+                    <span class="music-track-num">04</span>
+                    <div class="music-eq"><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div></div>
+                    <img class="music-track-thumb" src="https://i.postimg.cc/KzHL4VqQ/IMG-1674.jpg" alt="">
+                    <div class="music-track-info"><div class="music-track-title">Sống Xa Anh Chẳng Dễ Dàng</div><div class="music-track-artist">ViPer ft Hiếu Béo</div></div>
+                </div>
+                <div class="music-track" data-src="https://www.dropbox.com/scl/fi/fcodkiws92c9hu0g8wqtx/Mu-n-NgHi-u-Remake-style-TH.mp3?rlkey=gl4fpbx4ni0jmfqc9c8b8z33t&st=mgixn9k5&raw=1" data-img="https://i.postimg.cc/jjvyYCyp/IMG-1673.jpg">
+                    <span class="music-track-num">05</span>
+                    <div class="music-eq"><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div></div>
+                    <img class="music-track-thumb" src="https://i.postimg.cc/jjvyYCyp/IMG-1673.jpg" alt="">
+                    <div class="music-track-info"><div class="music-track-title">Muộn</div><div class="music-track-artist">Hiếu Béo Mix</div></div>
+                </div>
+                <div class="music-track" data-src="https://www.dropbox.com/scl/fi/mlcu5bhjwxe0wq7x2fti9/She-Neva-Know-Hi-u-B-o-remix.mp3?rlkey=0b2kwe3nfjjqz0ppse0y4kod6&st=iaqjmv1m&raw=1" data-img="https://i.postimg.cc/4yHcc5jG/IMG-1594.jpg">
+                    <span class="music-track-num">06</span>
+                    <div class="music-eq"><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div></div>
+                    <img class="music-track-thumb" src="https://i.postimg.cc/4yHcc5jG/IMG-1594.jpg" alt="">
+                    <div class="music-track-info"><div class="music-track-title">She Neva Know</div><div class="music-track-artist">Hiếu Béo Remix</div></div>
+                </div>
+                <div class="music-track" data-src="https://www.dropbox.com/scl/fi/tcg4aafjlmwds5ja5iydd/cccc.mp3?rlkey=iwgfociw0npsbeglsy8lgi7bx&st=rtc8pupi&raw=1" data-img="https://i.postimg.cc/ZR4TTXnv/IMG-1611.jpg">
+                    <span class="music-track-num">07</span>
+                    <div class="music-eq"><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div></div>
+                    <img class="music-track-thumb" src="https://i.postimg.cc/ZR4TTXnv/IMG-1611.jpg" alt="">
+                    <div class="music-track-info"><div class="music-track-title">Nonstop 2024 - Nhạc Nước Vui</div><div class="music-track-artist">Hồi Lại Ký Ức</div></div>
+                </div>
+                <div class="music-track" data-src="https://www.dropbox.com/scl/fi/yv21v90i6k5dwwzbf9kdb/As-Long-As-U-Love-Me-Chicken-x-D.Azh-Remix.mp3?rlkey=grev0dm4mijxppl7ed8op86lr&st=oyafvljp&raw=1" data-img="https://i.postimg.cc/NMschTC1/IMG-1602.jpg">
+                    <span class="music-track-num">08</span>
+                    <div class="music-eq"><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div></div>
+                    <img class="music-track-thumb" src="https://i.postimg.cc/NMschTC1/IMG-1602.jpg" alt="">
+                    <div class="music-track-info"><div class="music-track-title">As Long As U Love Me</div><div class="music-track-artist">Chicken x D.Azh Remix</div></div>
+                </div>
+                <div class="music-track" data-src="https://www.dropbox.com/scl/fi/3ryhow5ez0qv375qvzf4p/Whistle-Remix.mp3?rlkey=xhh3aom621d4emfsl7yadgmvx&st=wrjap740&raw=1" data-img="https://i.postimg.cc/MTssX3Gz/IMG-1373.jpg">
+                    <span class="music-track-num">09</span>
+                    <div class="music-eq"><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div></div>
+                    <img class="music-track-thumb" src="https://i.postimg.cc/MTssX3Gz/IMG-1373.jpg" alt="">
+                    <div class="music-track-info"><div class="music-track-title">Whistle Remix</div><div class="music-track-artist">Remix</div></div>
+                </div>
+                <div class="music-track" data-src="https://www.dropbox.com/scl/fi/rfeolhkafptg69s791nud/BAC-MoonLight-Shadow.mp3?rlkey=8x54tlmzeog0ze89xbkgv52dh&st=ndbgnz9r&raw=1" data-img="https://i.postimg.cc/vT14ScHC/IMG-1457.jpg">
+                    <span class="music-track-num">10</span>
+                    <div class="music-eq"><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div></div>
+                    <img class="music-track-thumb" src="https://i.postimg.cc/vT14ScHC/IMG-1457.jpg" alt="">
+                    <div class="music-track-info"><div class="music-track-title">Moonlight Shadow</div><div class="music-track-artist">Mix</div></div>
+                </div>
+                <div class="music-track" data-src="https://www.dropbox.com/scl/fi/xyudaw5hh5evop3ry4clb/BAC-Love-To-Be-Loved-By-You.mp3?rlkey=5qitkq9w6lgv5iofon83hvbax&st=vidn13t7&raw=1" data-img="https://i.postimg.cc/BbdjW4jb/IMG-1458.jpg">
+                    <span class="music-track-num">11</span>
+                    <div class="music-eq"><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div></div>
+                    <img class="music-track-thumb" src="https://i.postimg.cc/BbdjW4jb/IMG-1458.jpg" alt="">
+                    <div class="music-track-info"><div class="music-track-title">Love To Be Loved By You</div><div class="music-track-artist">Mix</div></div>
+                </div>
+                <div class="music-track" data-src="https://www.dropbox.com/scl/fi/jfgtorgbe4coqwmnk4x9t/Xin-loi-vi-da-xuat-hien.mp3?rlkey=75qzo8vopj37b407ovb17h5ca&st=g2zoyift&raw=1" data-img="https://i.postimg.cc/PJpMJtcM/IMG-1396.jpg">
+                    <span class="music-track-num">12</span>
+                    <div class="music-eq"><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div></div>
+                    <img class="music-track-thumb" src="https://i.postimg.cc/PJpMJtcM/IMG-1396.jpg" alt="">
+                    <div class="music-track-info"><div class="music-track-title">Xin Lỗi Vì Anh Đã Xuất Hiện</div><div class="music-track-artist">Mix</div></div>
+                </div>
+                <div class="music-track" data-src="https://www.dropbox.com/scl/fi/y49qzzx3y8eiixr1sao2d/Yeu-1-Nguoi-Co-Le-Haozi.mp3?rlkey=ue3cwk90enllz8x4ak6ltkrdf&st=jjriple8&raw=1" data-img="https://i.postimg.cc/VLJcQN74/IMG-1430.jpg">
+                    <span class="music-track-num">13</span>
+                    <div class="music-eq"><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div></div>
+                    <img class="music-track-thumb" src="https://i.postimg.cc/VLJcQN74/IMG-1430.jpg" alt="">
+                    <div class="music-track-info"><div class="music-track-title">Yêu Một Người Có Lẽ</div><div class="music-track-artist">Haozi Mix</div></div>
+                </div>
+                <div class="music-track" data-src="https://www.dropbox.com/scl/fi/4e6hxsc0pq7xrn6m799iv/M.t-LakHouse-Rmx-2024.mp3?rlkey=9nul3kadhyufx7cmywvcly632&st=69oyo6zj&raw=1" data-img="https://i.postimg.cc/bN4fzjWP/IMG-1431.jpg">
+                    <span class="music-track-num">14</span>
+                    <div class="music-eq"><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div></div>
+                    <img class="music-track-thumb" src="https://i.postimg.cc/bN4fzjWP/IMG-1431.jpg" alt="">
+                    <div class="music-track-info"><div class="music-track-title">Đánh Cắp Trái Tim</div><div class="music-track-artist">LakHouse Remix 2024</div></div>
+                </div>
+                <div class="music-track" data-src="https://www.dropbox.com/scl/fi/qwziuanwof1aespxh2uin/Nonstop-full-China.mp3?rlkey=ml3g2lnjbpzbi7am7sgm7rqil&st=n9t82snt&raw=1" data-img="https://i.postimg.cc/XJx03BS1/IMG-1437.jpg">
+                    <span class="music-track-num">15</span>
+                    <div class="music-eq"><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div></div>
+                    <img class="music-track-thumb" src="https://i.postimg.cc/XJx03BS1/IMG-1437.jpg" alt="">
+                    <div class="music-track-info"><div class="music-track-title">Nonstop Full China Cực Cháy</div><div class="music-track-artist">Mix</div></div>
+                </div>
+                <div class="music-track" data-src="https://www.dropbox.com/scl/fi/u90ky0kludw7pm1rd30sf/L-u-i-T-nh-i-Haozi-Mix.mp3?rlkey=9lv71l4o8xllnlfvppx1hjxsi&st=mvk3osc4&raw=1" data-img="https://i.postimg.cc/59BMfG1Q/IMG-1439.jpg">
+                    <span class="music-track-num">16</span>
+                    <div class="music-eq"><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div></div>
+                    <img class="music-track-thumb" src="https://i.postimg.cc/59BMfG1Q/IMG-1439.jpg" alt="">
+                    <div class="music-track-info"><div class="music-track-title">Lâu Đài Tình Ái</div><div class="music-track-artist">Haozi Mix</div></div>
+                </div>
+                <div class="music-track" data-src="https://www.dropbox.com/scl/fi/s09vx57xuca1nbaqnl4u9/Li-u-Thu-c-Cho-Tr-i-Tim-Hi-u-B-o-remix.mp3?rlkey=kaspv6gdwa5mpeb4jfdbpxzqo&st=yqnjrx7k&raw=1" data-img="https://i.postimg.cc/9Xs8nNmG/IMG-1672.jpg">
+                    <span class="music-track-num">17</span>
+                    <div class="music-eq"><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div></div>
+                    <img class="music-track-thumb" src="https://i.postimg.cc/9Xs8nNmG/IMG-1672.jpg" alt="">
+                    <div class="music-track-info"><div class="music-track-title">Liều Thuốc Cho Trái Tim</div><div class="music-track-artist">Hiếu Béo Remix</div></div>
+                </div>
+                <div class="music-track" data-src="https://www.dropbox.com/scl/fi/6scdevcp355xm1hbge35g/H-ng-Hoa-Phai-T-n-Huy-pt-ft-Hi-u-B-o.mp3?rlkey=ud1sdy6n7sdmumecww9r7pt8l&st=nrhiscwz&raw=1" data-img="https://i.postimg.cc/cHHwxZmr/IMG-1670.jpg">
+                    <span class="music-track-num">18</span>
+                    <div class="music-eq"><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div><div class="music-eq-bar"></div></div>
+                    <img class="music-track-thumb" src="https://i.postimg.cc/cHHwxZmr/IMG-1670.jpg" alt="">
+                    <div class="music-track-info"><div class="music-track-title">Hương Hoa Phai Tàn</div><div class="music-track-artist">Huy Pt ft Hiếu Béo</div></div>
+                </div>
+            </div>
+            <div class="music-no-results" id="musicNoResults">
+                <i class="fas fa-search" style="font-size:2rem;margin-bottom:10px;display:block;color:var(--accent-red)"></i>
+                No tracks found. Try a different search.
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Music Player Bar -->
+    <div class="music-player-bar" id="musicPlayerBar">
+        <div class="player-track-info">
+            <img class="player-thumb" id="playerThumb" src="https://i.postimg.cc/rwNfzVSJ/IMG-1680.jpg" alt="">
+            <div class="player-text">
+                <div class="player-song-name" id="playerSongName">Select a track</div>
+                <div class="player-song-artist" id="playerSongArtist">DShinee Zone</div>
+            </div>
+        </div>
+        <div class="player-controls">
+            <div class="player-buttons">
+                <button class="player-btn" id="playerPrev" title="Previous"><i class="fas fa-step-backward"></i></button>
+                <button class="player-btn player-btn-play" id="playerPlayPause" title="Play/Pause"><i class="fas fa-play"></i></button>
+                <button class="player-btn" id="playerNext" title="Next"><i class="fas fa-step-forward"></i></button>
+            </div>
+            <div class="player-progress-wrap">
+                <span class="player-time" id="playerCurrentTime">0:00</span>
+                <div class="player-progress-bar" id="playerProgressBar">
+                    <div class="player-progress-fill" id="playerProgressFill"></div>
+                </div>
+                <span class="player-time right" id="playerDuration">0:00</span>
+            </div>
+        </div>
+        <div class="player-volume">
+            <i class="fas fa-volume-up" id="playerVolIcon"></i>
+            <div class="player-vol-bar" id="playerVolBar">
+                <div class="player-vol-fill" id="playerVolFill"></div>
+            </div>
+        </div>
+    </div>
+    <audio id="musicAudio"></audio>
+
+    <!-- Vinyl Disc Player Overlay -->
+    <div class="vinyl-overlay" id="vinylOverlay">
+        <div class="vinyl-overlay-inner">
+            <div class="vinyl-left">
+                <button class="vinyl-close" id="vinylClose"><i class="fas fa-times"></i></button>
+                <div class="vinyl-disc-container">
+                    <div class="vinyl-disc" id="vinylDisc">
+                        <img class="vinyl-art" id="vinylArt" src="https://i.postimg.cc/rwNfzVSJ/IMG-1680.jpg" alt="">
+                    </div>
+                    <div class="vinyl-arm">
+                        <div class="vinyl-arm-line">
+                            <div class="vinyl-arm-pivot"></div>
+                            <div class="vinyl-arm-head"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="vinyl-now-info">
+                    <div class="vinyl-now-title" id="vinylTitle">Select a track</div>
+                    <div class="vinyl-now-artist" id="vinylArtist">DShinee Zone</div>
+                </div>
+                <div class="vinyl-controls">
+                    <button class="vinyl-ctrl-btn" id="vinylPrev"><i class="fas fa-step-backward"></i></button>
+                    <button class="vinyl-ctrl-btn vinyl-ctrl-play" id="vinylPlayPause"><i class="fas fa-play"></i></button>
+                    <button class="vinyl-ctrl-btn" id="vinylNext"><i class="fas fa-step-forward"></i></button>
+                </div>
+                <div class="vinyl-progress">
+                    <span class="vinyl-progress-time" id="vinylCurrentTime">0:00</span>
+                    <div class="vinyl-progress-bar" id="vinylProgressBar">
+                        <div class="vinyl-progress-fill" id="vinylProgressFill"></div>
+                    </div>
+                    <span class="vinyl-progress-time" id="vinylDuration">0:00</span>
+                </div>
+            </div>
+            <div class="vinyl-right">
+                <div class="vinyl-playlist-header"><i class="fas fa-list-ul"></i> Playlist</div>
+                <div class="vinyl-playlist" id="vinylPlaylist"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -2376,6 +3027,7 @@
                     <a href="#about">About</a>
                     <a href="#skills">Skills</a>
                     <a href="#resume">Resume</a>
+                    <a href="#music">Music</a>
                     <a href="#contact">Contact</a>
                 </div>
                 <div class="copyright">
@@ -2879,6 +3531,243 @@
                     initThreeJsBackground();
                 }, 4000);
             }
+            
+            // ===== DShinee Zone Music Player + Vinyl Disc =====
+            (function() {
+                const musicAudio = document.getElementById('musicAudio');
+                const tracks = document.querySelectorAll('.music-track');
+                const playerBar = document.getElementById('musicPlayerBar');
+                const playerThumb = document.getElementById('playerThumb');
+                const playerSongName = document.getElementById('playerSongName');
+                const playerSongArtist = document.getElementById('playerSongArtist');
+                const playerPlayPause = document.getElementById('playerPlayPause');
+                const playerPrev = document.getElementById('playerPrev');
+                const playerNext = document.getElementById('playerNext');
+                const playerProgressBar = document.getElementById('playerProgressBar');
+                const playerProgressFill = document.getElementById('playerProgressFill');
+                const playerCurrentTime = document.getElementById('playerCurrentTime');
+                const playerDuration = document.getElementById('playerDuration');
+                const playerVolBar = document.getElementById('playerVolBar');
+                const playerVolFill = document.getElementById('playerVolFill');
+                const playerVolIcon = document.getElementById('playerVolIcon');
+                const musicSearchInput = document.getElementById('musicSearchInput');
+                const musicNoResults = document.getElementById('musicNoResults');
+                // Vinyl elements
+                const vinylOverlay = document.getElementById('vinylOverlay');
+                const vinylClose = document.getElementById('vinylClose');
+                const vinylDisc = document.getElementById('vinylDisc');
+                const vinylArt = document.getElementById('vinylArt');
+                const vinylTitle = document.getElementById('vinylTitle');
+                const vinylArtist = document.getElementById('vinylArtist');
+                const vinylPlayPause = document.getElementById('vinylPlayPause');
+                const vinylPrev = document.getElementById('vinylPrev');
+                const vinylNext = document.getElementById('vinylNext');
+                const vinylProgressBar = document.getElementById('vinylProgressBar');
+                const vinylProgressFill = document.getElementById('vinylProgressFill');
+                const vinylCurrentTime = document.getElementById('vinylCurrentTime');
+                const vinylDurationEl = document.getElementById('vinylDuration');
+                const vinylPlaylist = document.getElementById('vinylPlaylist');
+                
+                if (!musicAudio || !tracks.length) return;
+                
+                let currentTrackIndex = -1;
+                let isPlaying = false;
+                musicAudio.volume = 0.8;
+                
+                function formatTime(s) {
+                    if (isNaN(s)) return '0:00';
+                    const m = Math.floor(s / 60);
+                    const sec = Math.floor(s % 60);
+                    return m + ':' + (sec < 10 ? '0' : '') + sec;
+                }
+                
+                // Build vinyl playlist sidebar
+                function buildVinylPlaylist() {
+                    if (!vinylPlaylist) return;
+                    vinylPlaylist.innerHTML = '';
+                    tracks.forEach((t, i) => {
+                        const img = t.getAttribute('data-img') || t.querySelector('.music-track-thumb').src;
+                        const title = t.querySelector('.music-track-title').textContent;
+                        const artist = t.querySelector('.music-track-artist').textContent;
+                        const item = document.createElement('div');
+                        item.className = 'vinyl-pl-item' + (i === currentTrackIndex ? ' active' : '');
+                        item.innerHTML = `<span class="vinyl-pl-item-num">${String(i+1).padStart(2,'0')}</span><img class="vinyl-pl-item-thumb" src="${img}" alt=""><div class="vinyl-pl-item-info"><div class="vinyl-pl-item-title">${title}</div><div class="vinyl-pl-item-artist">${artist}</div></div>`;
+                        item.addEventListener('click', () => loadTrack(i));
+                        vinylPlaylist.appendChild(item);
+                    });
+                }
+                buildVinylPlaylist();
+                
+                function updateVinylPlaylistActive() {
+                    if (!vinylPlaylist) return;
+                    vinylPlaylist.querySelectorAll('.vinyl-pl-item').forEach((el, i) => {
+                        el.classList.toggle('active', i === currentTrackIndex);
+                    });
+                    const activeItem = vinylPlaylist.querySelector('.vinyl-pl-item.active');
+                    if (activeItem) activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+                
+                function syncAllUI() {
+                    const track = tracks[currentTrackIndex];
+                    if (!track) return;
+                    const img = track.getAttribute('data-img') || track.querySelector('.music-track-thumb').src;
+                    const title = track.querySelector('.music-track-title').textContent;
+                    const artist = track.querySelector('.music-track-artist').textContent;
+                    // Bottom bar
+                    playerThumb.src = img; playerSongName.textContent = title; playerSongArtist.textContent = artist;
+                    // Vinyl
+                    if (vinylArt) vinylArt.src = img;
+                    if (vinylTitle) vinylTitle.textContent = title;
+                    if (vinylArtist) vinylArtist.textContent = artist;
+                    updateVinylPlaylistActive();
+                }
+                
+                function loadTrack(index) {
+                    if (index < 0 || index >= tracks.length) return;
+                    tracks.forEach(t => t.classList.remove('active', 'paused'));
+                    currentTrackIndex = index;
+                    tracks[index].classList.add('active');
+                    musicAudio.src = tracks[index].getAttribute('data-src');
+                    syncAllUI();
+                    playerBar.classList.add('visible');
+                    musicAudio.play().then(() => { isPlaying = true; updateAllPlayPause(); }).catch(() => {});
+                }
+                
+                function updateAllPlayPause() {
+                    const pIcon = playerPlayPause.querySelector('i');
+                    const vIcon = vinylPlayPause ? vinylPlayPause.querySelector('i') : null;
+                    if (isPlaying) {
+                        pIcon.className = 'fas fa-pause';
+                        if (vIcon) vIcon.className = 'fas fa-pause';
+                        if (vinylDisc) { vinylDisc.classList.add('spinning'); vinylDisc.classList.remove('paused'); }
+                        if (tracks[currentTrackIndex]) tracks[currentTrackIndex].classList.remove('paused');
+                    } else {
+                        pIcon.className = 'fas fa-play';
+                        if (vIcon) vIcon.className = 'fas fa-play';
+                        if (vinylDisc) vinylDisc.classList.add('paused');
+                        if (tracks[currentTrackIndex]) tracks[currentTrackIndex].classList.add('paused');
+                    }
+                }
+                
+                function openVinyl() {
+                    if (!vinylOverlay) return;
+                    vinylOverlay.style.display = 'flex';
+                    setTimeout(() => vinylOverlay.classList.add('active'), 10);
+                    document.body.style.overflow = 'hidden';
+                    syncAllUI();
+                    updateAllPlayPause();
+                }
+                function closeVinyl() {
+                    if (!vinylOverlay) return;
+                    vinylOverlay.classList.remove('active');
+                    setTimeout(() => { vinylOverlay.style.display = 'none'; }, 400);
+                    document.body.style.overflow = '';
+                }
+                
+                // Track click -> open vinyl
+                tracks.forEach((track, idx) => {
+                    track.addEventListener('click', () => {
+                        if (currentTrackIndex !== idx) { loadTrack(idx); }
+                        openVinyl();
+                    });
+                });
+                
+                // Close vinyl
+                if (vinylClose) vinylClose.addEventListener('click', closeVinyl);
+                if (vinylOverlay) vinylOverlay.addEventListener('click', (e) => { if (e.target === vinylOverlay) closeVinyl(); });
+                
+                // Bottom bar play/pause
+                playerPlayPause.addEventListener('click', () => {
+                    if (currentTrackIndex === -1) { loadTrack(0); return; }
+                    if (isPlaying) musicAudio.pause(); else musicAudio.play();
+                });
+                // Vinyl play/pause
+                if (vinylPlayPause) vinylPlayPause.addEventListener('click', () => {
+                    if (currentTrackIndex === -1) { loadTrack(0); return; }
+                    if (isPlaying) musicAudio.pause(); else musicAudio.play();
+                });
+                
+                musicAudio.addEventListener('play', () => { isPlaying = true; updateAllPlayPause(); });
+                musicAudio.addEventListener('pause', () => { isPlaying = false; updateAllPlayPause(); });
+                
+                // Nav: bottom bar
+                playerPrev.addEventListener('click', () => { loadTrack(currentTrackIndex > 0 ? currentTrackIndex - 1 : tracks.length - 1); });
+                playerNext.addEventListener('click', () => { loadTrack(currentTrackIndex < tracks.length - 1 ? currentTrackIndex + 1 : 0); });
+                // Nav: vinyl
+                if (vinylPrev) vinylPrev.addEventListener('click', () => { loadTrack(currentTrackIndex > 0 ? currentTrackIndex - 1 : tracks.length - 1); });
+                if (vinylNext) vinylNext.addEventListener('click', () => { loadTrack(currentTrackIndex < tracks.length - 1 ? currentTrackIndex + 1 : 0); });
+                
+                musicAudio.addEventListener('ended', () => { loadTrack(currentTrackIndex < tracks.length - 1 ? currentTrackIndex + 1 : 0); });
+                
+                // Progress sync
+                musicAudio.addEventListener('timeupdate', () => {
+                    if (!musicAudio.duration) return;
+                    const pct = (musicAudio.currentTime / musicAudio.duration) * 100;
+                    playerProgressFill.style.width = pct + '%';
+                    playerCurrentTime.textContent = formatTime(musicAudio.currentTime);
+                    if (vinylProgressFill) vinylProgressFill.style.width = pct + '%';
+                    if (vinylCurrentTime) vinylCurrentTime.textContent = formatTime(musicAudio.currentTime);
+                });
+                musicAudio.addEventListener('loadedmetadata', () => {
+                    playerDuration.textContent = formatTime(musicAudio.duration);
+                    if (vinylDurationEl) vinylDurationEl.textContent = formatTime(musicAudio.duration);
+                });
+                
+                // Seek: bottom bar
+                playerProgressBar.addEventListener('click', (e) => {
+                    const rect = playerProgressBar.getBoundingClientRect();
+                    if (musicAudio.duration) musicAudio.currentTime = ((e.clientX - rect.left) / rect.width) * musicAudio.duration;
+                });
+                // Seek: vinyl
+                if (vinylProgressBar) vinylProgressBar.addEventListener('click', (e) => {
+                    const rect = vinylProgressBar.getBoundingClientRect();
+                    if (musicAudio.duration) musicAudio.currentTime = ((e.clientX - rect.left) / rect.width) * musicAudio.duration;
+                });
+                
+                // Volume
+                if (playerVolBar) {
+                    playerVolBar.addEventListener('click', (e) => {
+                        const rect = playerVolBar.getBoundingClientRect();
+                        const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+                        musicAudio.volume = pct;
+                        playerVolFill.style.width = (pct * 100) + '%';
+                        playerVolIcon.className = pct === 0 ? 'fas fa-volume-mute' : pct < 0.5 ? 'fas fa-volume-down' : 'fas fa-volume-up';
+                    });
+                }
+                if (playerVolIcon) {
+                    let savedVol = 0.8;
+                    playerVolIcon.addEventListener('click', () => {
+                        if (musicAudio.volume > 0) {
+                            savedVol = musicAudio.volume; musicAudio.volume = 0;
+                            playerVolFill.style.width = '0%'; playerVolIcon.className = 'fas fa-volume-mute';
+                        } else {
+                            musicAudio.volume = savedVol;
+                            playerVolFill.style.width = (savedVol * 100) + '%';
+                            playerVolIcon.className = savedVol < 0.5 ? 'fas fa-volume-down' : 'fas fa-volume-up';
+                        }
+                    });
+                }
+                
+                // Search
+                if (musicSearchInput) {
+                    musicSearchInput.addEventListener('input', () => {
+                        const q = musicSearchInput.value.toLowerCase();
+                        let visible = 0;
+                        tracks.forEach(t => {
+                            const title = t.querySelector('.music-track-title').textContent.toLowerCase();
+                            const artist = t.querySelector('.music-track-artist').textContent.toLowerCase();
+                            if (title.includes(q) || artist.includes(q)) { t.style.display = 'flex'; visible++; }
+                            else { t.style.display = 'none'; }
+                        });
+                        if (musicNoResults) musicNoResults.style.display = visible === 0 ? 'block' : 'none';
+                    });
+                }
+                
+                // Bottom bar thumb click -> open vinyl
+                if (playerThumb) playerThumb.addEventListener('click', openVinyl);
+                if (playerSongName) playerSongName.style.cursor = 'pointer';
+                if (playerSongName) playerSongName.addEventListener('click', openVinyl);
+            })();
             
             // Glitch text effect initialization
             setTimeout(() => {
