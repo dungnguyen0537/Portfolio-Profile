@@ -1114,6 +1114,92 @@
             box-shadow: 0 0 10px var(--accent-cyan-glow);
         }
 
+        /* Projects section */
+        .projects-grid {
+            row-gap: 30px;
+        }
+
+        .projects-grid > [class*="col-"] {
+            display: flex;
+        }
+
+        .projects-grid > [class*="col-"] .project-card {
+            width: 100%;
+        }
+
+        .project-card {
+            height: 100%;
+        }
+
+        .project-card .cyber-box-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            height: 100%;
+        }
+
+        .project-label {
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            padding: 6px 12px;
+            border: 1px solid rgba(0, 255, 213, 0.25);
+            border-radius: 999px;
+            background: rgba(0, 255, 213, 0.08);
+            color: var(--accent-cyan);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .project-title {
+            margin: 0;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .project-description {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            flex-grow: 1;
+        }
+
+        .project-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .project-stack li {
+            padding: 8px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(227, 27, 84, 0.3);
+            background: rgba(227, 27, 84, 0.08);
+            color: var(--text-light);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .project-actions {
+            margin-top: auto;
+        }
+
+        .project-actions .btn-cyber {
+            margin-right: 0;
+        }
+
+        .project-card:hover .project-title {
+            color: var(--accent-cyan);
+            transition: var(--transition);
+        }
+
         /* Contact section enhancements */
         .contact-box {
             text-align: center;
@@ -2318,7 +2404,7 @@
                         <a class="nav-link" href="#skills" data-text="Skills">Skills</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#resume" data-text="Resume">Resume</a>
+                        <a class="nav-link" href="#projects" data-text="Projects">Projects</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#music" data-text="Music">Music</a>
@@ -2350,7 +2436,7 @@
                         <p id="typing-text"></p>
                         <div class="hero-buttons d-flex gap-3">
                             <a href="#contact" class="btn-cyber">Contact Me</a>
-                            <a href="#resume" class="btn-outline">My Resume</a>
+                            <a href="#projects" class="btn-outline">My Projects</a>
                         </div>
                         <div class="footer-social hero-social-icons">
                             <a href="https://github.com/LePhiAnhDev" target="_blank"><i class="fab fa-github"></i></a>
@@ -2635,83 +2721,69 @@
     <!-- Terminal Section Divider -->
     <div class="terminal-divider">
         <div class="terminal-line"></div>
-        <div class="terminal-commands">cat ./resume_data.json</div>
+        <div class="terminal-commands">ls ./projects</div>
     </div>
 
-    <!-- Resume Section -->
-    <section id="resume" class="resume section">
+    <!-- Projects Section -->
+    <section id="projects" class="projects section">
         <div class="container">
             <div class="section-title" data-aos="fade-up">
-                <h2 class="glitch-effect" data-text="My Resume">My Resume</h2>
-                <p>My education history and professional experience.</p>
+                <h2 class="glitch-effect" data-text="My Projects">My Projects</h2>
+                <p>A featured project showcase with a ready-made card layout for adding more projects later.</p>
             </div>
 
-            <div class="row">
+            <div class="row projects-grid">
+                <!-- Project template: duplicate a .col-lg-6 block, then update the label, title, description, tags, and data-project-url -->
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="cyber-box">
-                        <div class="cyber-box-inner resume-wrapper">
+                    <div class="cyber-box project-card">
+                        <div class="cyber-box-inner">
                             <div class="cyber-box-corners">
                                 <div class="cyber-corner corner-tl"></div>
                                 <div class="cyber-corner corner-tr"></div>
                                 <div class="cyber-corner corner-bl"></div>
                                 <div class="cyber-corner corner-br"></div>
                             </div>
-                            <h3>Education</h3>
-                            <div class="timeline">
-                                <div class="timeline-item" id="edu-item-1">
-                                    <div class="timeline-content">
-                                        <span class="timeline-date">2021 - 2024</span>
-                                        <h4>MOS Specialized Class</h4>
-                                        <h5>Marie Curie High School</h5>
-                                    </div>
-                                </div>
-                                <div class="timeline-item" id="edu-item-2">
-                                    <div class="timeline-content">
-                                        <span class="timeline-date">2020 - Present</span>
-                                        <h4>Software Engineering</h4>
-                                        <h5>Gia Dinh University</h5>
-                                        <p>Champion of the Celestia Mammathon Hackathon Vietnam</p>
-                                    </div>
-                                </div>
+                            <span class="project-label">Project 01</span>
+                            <h3 class="project-title">Link Temporary</h3>
+                            <p class="project-description">
+                                A utility project for creating and managing temporary links so resources can be shared quickly and only when needed.
+                            </p>
+                            <ul class="project-stack">
+                                <li>Temporary Links</li>
+                                <li>Quick Sharing</li>
+                                <li>Utility Tool</li>
+                            </ul>
+                            <div class="project-actions">
+                                <button type="button" class="btn-cyber project-btn" data-project-url="" title="Add your project URL to activate this button">
+                                    View Project
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="cyber-box">
-                        <div class="cyber-box-inner resume-wrapper">
+                    <div class="cyber-box project-card">
+                        <div class="cyber-box-inner">
                             <div class="cyber-box-corners">
                                 <div class="cyber-corner corner-tl"></div>
                                 <div class="cyber-corner corner-tr"></div>
                                 <div class="cyber-corner corner-bl"></div>
                                 <div class="cyber-corner corner-br"></div>
                             </div>
-                            <h3>Experience</h3>
-                            <div class="timeline">
-                                <div class="timeline-item" id="exp-item-1">
-                                    <div class="timeline-content">
-                                        <span class="timeline-date">2020 - 2023</span>
-                                        <h4>Graphic Designer & Video Editor</h4>
-                                        <h5>Freelancer</h5>
-                                        <p>Efficiently manage a fanpage and two social media accounts, with a strong focus on continuous growth and the flexibility to scale services</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-item" id="exp-item-2">
-                                    <div class="timeline-content">
-                                        <span class="timeline-date">2023 - 2024</span>
-                                        <h4>Security Engineer</h4>
-                                        <h5>Work at Netflix Vietnam</h5>
-                                        <p>Specialize in testing and securing Netflix account cookies by identifying vulnerabilities and implementing effective patches</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-item" id="exp-item-3">
-                                    <div class="timeline-content">
-                                        <span class="timeline-date">2024 - Present</span>
-                                        <h4>Backend & AI Developer</h4>
-                                        <h5>Blockchain, Web3, and AI</h5>
-                                        <p>Providing services and solutions for software applications and website platforms.</p>
-                                    </div>
-                                </div>
+                            <span class="project-label">Project 02</span>
+                            <h3 class="project-title">Test AdBlocker</h3>
+                            <p class="project-description">
+                                A testing utility for checking ad blocker behavior and validating detection flows before they are applied in production.
+                            </p>
+                            <ul class="project-stack">
+                                <li>AdBlock Testing</li>
+                                <li>Detection Flow</li>
+                                <li>QA Utility</li>
+                            </ul>
+                            <div class="project-actions">
+                                <button type="button" class="btn-cyber project-btn" data-project-url="" title="Add your project URL to activate this button">
+                                    View Project
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -3026,7 +3098,7 @@
                     <a href="#home">Home</a>
                     <a href="#about">About</a>
                     <a href="#skills">Skills</a>
-                    <a href="#resume">Resume</a>
+                    <a href="#projects">Projects</a>
                     <a href="#music">Music</a>
                     <a href="#contact">Contact</a>
                 </div>
@@ -3047,8 +3119,8 @@
             // Initialize variables
             const loader = document.querySelector('.loader');
             const backToTopButton = document.querySelector('.back-to-top');
-            const timelineItems = document.querySelectorAll('.timeline-item');
             const contactForm = document.getElementById('contact-form');
+            const projectButtons = document.querySelectorAll('.project-btn');
             
             // Custom cursor
             const cursor = document.querySelector('.custom-cursor');
@@ -3392,6 +3464,16 @@
                     });
                 });
             }
+
+            // Open project links when a URL is provided in data-project-url
+            projectButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const projectUrl = this.dataset.projectUrl;
+                    if (!projectUrl) return;
+
+                    window.open(projectUrl, '_blank', 'noopener,noreferrer');
+                });
+            });
             
             // Telegram form submission
             if (contactForm) {
