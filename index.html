@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <link rel="icon" href="image.png" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DShinee is a cyber-inspired developer portfolio focused on backend architecture, AI features, and practical product engineering.">
     <title> DShinee | Cyber Developer Portfolio</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -23,34 +24,34 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <style>
         :root {
-            --primary-bg: #0a0a11;
-            --secondary-bg: #101020;
-            --card-bg: #151525;
+            --primary-bg: #090b12;
+            --secondary-bg: #101423;
+            --card-bg: #111827;
             --text-light: #f2f2ff;
-            --text-muted: #a0a0c0;
-            --accent-red: #e31b54;
-            --accent-cyan: #00ffd5;
-            --accent-blue: #0084ff;
+            --text-muted: #a8b1d1;
+            --accent-red: #ff5f7c;
+            --accent-cyan: #6ef3d6;
+            --accent-blue: #5b8cff;
             --accent-purple: #9900ff;
-            --accent-dark-red: #960029;
-            --accent-glow: rgba(227, 27, 84, 0.6);
-            --accent-cyan-glow: rgba(0, 255, 213, 0.6);
-            --accent-blue-glow: rgba(0, 132, 255, 0.6);
+            --accent-dark-red: #b12447;
+            --accent-glow: rgba(255, 95, 124, 0.4);
+            --accent-cyan-glow: rgba(110, 243, 214, 0.35);
+            --accent-blue-glow: rgba(91, 140, 255, 0.35);
             --gradient-primary: linear-gradient(135deg, var(--accent-dark-red), var(--accent-red));
             --gradient-cyber: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
-            --gradient-background: linear-gradient(135deg, #0a0a18, #151530);
-            --gradient-card: linear-gradient(135deg, #12122a, #1a1a35);
+            --gradient-background: linear-gradient(140deg, #090b12 0%, #12192b 55%, #0d1220 100%);
+            --gradient-card: linear-gradient(160deg, rgba(20, 28, 47, 0.96), rgba(10, 14, 24, 0.88));
             --gradient-hover: linear-gradient(135deg, var(--accent-red), #ff3366);
-            --border-radius: 4px;
-            --border-radius-sm: 2px;
-            --border-radius-lg: 8px;
-            --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.3);
-            --shadow-strong: 0 8px 30px rgba(0, 0, 0, 0.4);
-            --shadow-neon: 0 0 15px rgba(227, 27, 84, 0.3);
-            --shadow-neon-cyan: 0 0 15px rgba(0, 255, 213, 0.3);
-            --shadow-neon-blue: 0 0 15px rgba(0, 132, 255, 0.3);
+            --border-radius: 14px;
+            --border-radius-sm: 10px;
+            --border-radius-lg: 22px;
+            --shadow-subtle: 0 16px 40px rgba(3, 8, 20, 0.32);
+            --shadow-strong: 0 18px 60px rgba(3, 8, 20, 0.45);
+            --shadow-neon: 0 0 20px rgba(255, 95, 124, 0.2);
+            --shadow-neon-cyan: 0 0 20px rgba(110, 243, 214, 0.18);
+            --shadow-neon-blue: 0 0 20px rgba(91, 140, 255, 0.18);
             --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --cyber-border: 1px solid rgba(227, 27, 84, 0.2);
+            --cyber-border: 1px solid rgba(255, 255, 255, 0.08);
             --glitch-duration: 0.55s;
         }
 
@@ -67,13 +68,13 @@
         }
 
         body {
-            font-family: 'Rajdhani', sans-serif;
-            line-height: 1.6;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            line-height: 1.72;
             color: var(--text-light);
             background: var(--primary-bg);
             overflow-x: hidden;
-            font-weight: 300;
-            font-size: 19px;
+            font-weight: 400;
+            font-size: 17px;
             position: relative;
         }
 
@@ -84,14 +85,17 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--gradient-background);
+            background:
+                radial-gradient(circle at top right, rgba(110, 243, 214, 0.12), transparent 24%),
+                radial-gradient(circle at 10% 20%, rgba(255, 95, 124, 0.12), transparent 28%),
+                var(--gradient-background);
             z-index: -1;
         }
 
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Chakra Petch', sans-serif;
             font-weight: 600;
-            letter-spacing: -0.5px;
+            letter-spacing: 0;
             color: white;
         }
 
@@ -2344,9 +2348,437 @@
             .vinyl-progress { max-width: 300px; margin-top: 12px; }
             .vinyl-arm { display: none; }
         }
+
+        /* UI/UX refinement layer */
+        a,
+        button {
+            cursor: pointer;
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible {
+            outline: 2px solid var(--accent-cyan);
+            outline-offset: 3px;
+        }
+
+        .skip-link {
+            position: fixed;
+            top: -48px;
+            left: 20px;
+            z-index: 10001;
+            padding: 10px 16px;
+            background: var(--text-light);
+            color: var(--primary-bg);
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: top 0.2s ease;
+        }
+
+        .skip-link:focus {
+            top: 20px;
+        }
+
+        .navbar {
+            background: rgba(9, 11, 18, 0.35);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .navbar-brand {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .navbar-nav .nav-link {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.92rem;
+            letter-spacing: 1px;
+            margin-left: 22px;
+        }
+
+        .hero {
+            padding: 150px 0 110px;
+        }
+
+        .hero-content {
+            max-width: 640px;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(110, 243, 214, 0.18);
+            background: rgba(110, 243, 214, 0.08);
+            color: var(--accent-cyan);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-eyebrow::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 12px var(--accent-cyan-glow);
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3.2rem, 8vw, 5.2rem);
+            line-height: 0.96;
+            letter-spacing: 1px;
+            margin-bottom: 22px;
+        }
+
+        #typing-text {
+            max-width: 34rem;
+            min-height: 2.4rem;
+            margin-bottom: 10px;
+            font-size: 1.02rem;
+            white-space: normal;
+        }
+
+        .hero-content .hero-summary {
+            margin-bottom: 24px;
+            padding-left: 0;
+            border-right: 0;
+            color: var(--text-muted);
+            font-size: 1.08rem;
+            line-height: 1.85;
+            font-family: 'Be Vietnam Pro', sans-serif;
+            white-space: normal;
+            overflow: visible;
+        }
+
+        .hero-content .hero-summary::before {
+            display: none;
+        }
+
+        .hero-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 0;
+            margin: 0 0 30px;
+            list-style: none;
+        }
+
+        .hero-highlights li {
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-light);
+            font-size: 0.92rem;
+            line-height: 1.4;
+        }
+
+        .hero-buttons::before {
+            display: none;
+        }
+
+        .hero-meta {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 28px;
+        }
+
+        .hero-stat {
+            padding: 18px 18px 16px;
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .hero-stat strong {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--text-light);
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1.45rem;
+        }
+
+        .hero-stat span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .hero-social-icons {
+            gap: 12px;
+        }
+
+        .hero-img .cyber-box-inner {
+            padding: 18px;
+        }
+
+        .hero-img img {
+            width: 100%;
+            min-height: 520px;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: 12px;
+        }
+
+        .hero-panel {
+            margin-top: 18px;
+            padding: 18px 20px;
+            border-radius: 18px;
+            border: 1px solid rgba(110, 243, 214, 0.12);
+            background: rgba(10, 14, 24, 0.78);
+            backdrop-filter: blur(12px);
+        }
+
+        .hero-panel-heading {
+            margin-bottom: 14px;
+            color: var(--accent-cyan);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.82rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hero-panel-list {
+            display: grid;
+            gap: 12px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .hero-panel-list li {
+            display: flex;
+            gap: 12px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .hero-panel-list li::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            margin-top: 8px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: var(--accent-red);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .btn-cyber,
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 50px;
+            padding: 0 24px;
+            border-radius: 999px;
+            font-family: 'Chakra Petch', sans-serif;
+            letter-spacing: 0.08em;
+        }
+
+        .hero-buttons .btn-cyber,
+        .hero-buttons .btn-outline {
+            margin-right: 0;
+        }
+
+        .section-title {
+            margin-bottom: 52px;
+            padding-top: 0;
+        }
+
+        .section-title h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            letter-spacing: 0.08em;
+        }
+
+        .section-title p {
+            max-width: 720px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .terminal-divider {
+            margin: 24px 0 8px;
+        }
+
+        .cyber-box {
+            background: rgba(17, 24, 39, 0.64);
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .cyber-box::before {
+            opacity: 1;
+        }
+
+        .cyber-box-inner {
+            background: linear-gradient(180deg, rgba(17, 24, 39, 0.92), rgba(11, 15, 24, 0.88));
+            padding: 24px;
+        }
+
+        .project-title {
+            font-size: 1.65rem;
+        }
+
+        .project-description,
+        .info-item-value,
+        .timeline-content p,
+        .contact-box a,
+        .contact-box h4 {
+            color: var(--text-light);
+        }
+
+        .project-stack li {
+            border-color: rgba(110, 243, 214, 0.16);
+            background: rgba(110, 243, 214, 0.08);
+        }
+
+        .contact-box-inner {
+            height: 100%;
+        }
+
+        .contact-box a {
+            word-break: break-word;
+        }
+
+        .footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        @media (max-width: 991px) {
+            .hero {
+                padding-top: 132px;
+            }
+
+            .hero-meta {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-wrap: wrap;
+            }
+
+            .hero-img {
+                margin-top: 28px;
+            }
+
+            .hero-img img {
+                min-height: 420px;
+            }
+
+            .navbar-collapse {
+                margin-top: 14px;
+                padding: 16px 20px;
+                border-radius: 18px;
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                background: rgba(9, 11, 18, 0.96);
+            }
+        }
+
+        @media (max-width: 767px) {
+            .hero-content h1 {
+                letter-spacing: 0;
+            }
+
+            .hero-highlights li {
+                width: 100%;
+            }
+
+            #typing-text {
+                font-size: 0.95rem;
+            }
+
+            .hero-img img {
+                min-height: 340px;
+            }
+
+            .section-title p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .navbar > .container {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .navbar-brand {
+                max-width: calc(100% - 64px);
+            }
+
+            .navbar-toggler {
+                margin-left: auto;
+            }
+
+            .hero-content,
+            .hero-summary,
+            #typing-text,
+            .section-title p {
+                max-width: 100%;
+            }
+
+            .hero-content h1 {
+                font-size: clamp(2.6rem, 14vw, 3.6rem);
+            }
+
+            .hero-buttons .btn-cyber,
+            .hero-buttons .btn-outline {
+                width: 100%;
+            }
+
+            .hero-social-icons {
+                flex-wrap: wrap;
+            }
+
+            .hero-meta {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html:focus-within {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .custom-cursor,
+            .cursor-dot,
+            .digital-rain,
+            #particles-js,
+            #canvas-container,
+            .scanlines,
+            .grid-pattern {
+                display: none !important;
+            }
+
+            .hero-content p,
+            .terminal-text {
+                border-right: 0 !important;
+            }
+        }
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#home">Skip to content</a>
     <!-- Scanline effect -->
     <div class="scanlines"></div>
 
@@ -2386,12 +2818,15 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="#home" aria-label="Go to homepage">
                 <div class="logo-container">
                     <div class="logo-icon">Dev</div>
                     <div class="logo-text">DShinee</div>
                 </div>
             </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
@@ -2424,24 +2859,47 @@
     <div id="particles-js"></div>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section id="home" class="hero" tabindex="-1">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
-                        <h1 class="glitch-effect" data-text="Hello, I'm DShinee">
-                            Hello, I'm<br>
+                        <div class="hero-eyebrow">Available for backend and AI product work</div>
+                        <h1 id="hero-title" class="glitch-effect" data-text="Hello, I'm DShinee">
+                            Backend systems<br>
                             <span class="text-glitch">DShinee</span>
                         </h1>
-                        <p id="typing-text"></p>
+                        <p id="typing-text" aria-live="polite"></p>
+                        <p class="hero-summary">
+                            I build practical API platforms, automation flows, and AI-powered features with a focus on reliability, clean architecture, and a developer experience that feels fast instead of fragile.
+                        </p>
+                        <ul class="hero-highlights">
+                            <li>Spring Boot and FastAPI for scalable services</li>
+                            <li>Automation-first thinking for internal tools</li>
+                            <li>Cyber-inspired UI with cleaner product polish</li>
+                        </ul>
                         <div class="hero-buttons d-flex gap-3">
-                            <a href="#contact" class="btn-cyber">Contact Me</a>
-                            <a href="#projects" class="btn-outline">My Projects</a>
+                            <a href="#contact" class="btn-cyber">Start a Project</a>
+                            <a href="#projects" class="btn-outline">View Selected Work</a>
+                        </div>
+                        <div class="hero-meta">
+                            <div class="hero-stat">
+                                <strong>06</strong>
+                                <span>Core stacks in active rotation</span>
+                            </div>
+                            <div class="hero-stat">
+                                <strong>API</strong>
+                                <span>Backend-first delivery mindset</span>
+                            </div>
+                            <div class="hero-stat">
+                                <strong>HCMC</strong>
+                                <span>Remote-friendly from Vietnam</span>
+                            </div>
                         </div>
                         <div class="footer-social hero-social-icons">
-                            <a href="https://github.com/LePhiAnhDev" target="_blank"><i class="fab fa-github"></i></a>
-                            <a href="https://discord.com/invite/lephianhdev"><i class="fab fa-discord"></i></a>
-                            <a href="https://t.me/lephianh386ht" target="_blank"><i class="fab fa-telegram"></i></a>
+                            <a href="https://github.com/LePhiAnhDev" target="_blank" rel="noreferrer" aria-label="Open GitHub profile"><i class="fab fa-github"></i></a>
+                            <a href="https://discord.com/invite/lephianhdev" target="_blank" rel="noreferrer" aria-label="Open Discord invite"><i class="fab fa-discord"></i></a>
+                            <a href="https://t.me/lephianh386ht" target="_blank" rel="noreferrer" aria-label="Open Telegram profile"><i class="fab fa-telegram"></i></a>
                         </div>
                     </div>
                 </div>
@@ -2455,8 +2913,16 @@
                                     <div class="cyber-corner corner-bl"></div>
                                     <div class="cyber-corner corner-br"></div>
                                 </div>
-                                <img src="IMG_3987.jpeg" alt="Profile Image" style="width: 100%; height: auto; border-radius: 2px;">
+                                <img src="IMG_3987.jpeg" alt="Portrait of DShinee for the portfolio hero section">
                             </div>
+                        </div>
+                        <div class="hero-panel" data-aos="fade-up" data-aos-delay="300">
+                            <div class="hero-panel-heading">Current Focus</div>
+                            <ul class="hero-panel-list">
+                                <li>Designing maintainable backend foundations for products that need to move fast.</li>
+                                <li>Connecting AI features to real workflows instead of shipping isolated demos.</li>
+                                <li>Refining portfolio and product interfaces so the experience feels sharp, not noisy.</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -2475,7 +2941,7 @@
         <div class="container">
             <div class="section-title" data-aos="fade-up">
                 <h2 class="glitch-effect" data-text="About Me">About Me</h2>
-                <p>Learn more about me – my background, personal insights, passions, and the drive that keeps me from giving up.</p>
+                <p>A quick snapshot of who I am, how I work, and the context behind the systems and experiences I like building.</p>
             </div>
 
             <div class="row">
@@ -2559,7 +3025,7 @@
                             </div>
                             
                             <div class="text-center mt-4">
-                                <a href="#" class="btn-cyber">Download CV</a>
+                                <a href="#contact" class="btn-cyber">Request CV</a>
                             </div>
                         </div>
                     </div>
@@ -2579,7 +3045,7 @@
         <div class="container">
             <div class="section-title" data-aos="fade-up">
                 <h2 class="glitch-effect" data-text="My Skills">My Skills</h2>
-                <p>These are the technologies and frameworks I use to bring ideas to life.</p>
+                <p>The tools I trust most for shipping backend services, data flows, and polished product experiences.</p>
             </div>
 
             <div class="skills-container">
@@ -2729,7 +3195,7 @@
         <div class="container">
             <div class="section-title" data-aos="fade-up">
                 <h2 class="glitch-effect" data-text="My Projects">My Projects</h2>
-                <p>A featured project showcase with a ready-made card layout for adding more projects later.</p>
+                <p>A compact selection of projects that show how I approach utility, automation, and real-world delivery.</p>
             </div>
 
             <div class="row projects-grid">
@@ -2803,7 +3269,7 @@
         <div class="container">
             <div class="section-title" data-aos="fade-up">
                 <h2 class="glitch-effect" data-text="DShinee Zone Music">DShinee Zone Music</h2>
-                <p>My curated playlist — vibes for coding, chilling, and everything in between.</p>
+                <p>A personal playlist for coding sessions, long debug nights, and the quiet parts between shipping.</p>
             </div>
 
             <div class="music-search-wrapper" data-aos="fade-up" data-aos-delay="100">
@@ -2939,7 +3405,7 @@
         <div class="container">
             <div class="section-title" data-aos="fade-up">
                 <h2 class="glitch-effect" data-text="Contact Me">Contact Me</h2>
-                <p>Let's connect! Feel free to reach out through any of these channels.</p>
+                <p>The fastest reply is usually on Telegram. If the form cannot send directly, it will fall back to opening a prefilled Telegram message.</p>
             </div>
 
             <div class="row justify-content-center" data-aos="fade-up">
@@ -2949,7 +3415,7 @@
                             <div class="contact-box-inner">
                                 <i class="fab fa-github"></i>
                                 <h4>GitHub</h4>
-                                <a href="https://github.com/dungnguyen0537" target="_blank">DShineeDev</a>
+                                <a href="https://github.com/dungnguyen0537" target="_blank" rel="noreferrer">DShineeDev</a>
                             </div>
                         </div>
                         
@@ -2957,7 +3423,7 @@
                             <div class="contact-box-inner">
                                 <i class="fab fa-telegram"></i>
                                 <h4>Telegram</h4>
-                                <a href="https://t.me/dshinee0537">@dshinee0537</a>
+                                <a href="https://t.me/dshinee0537" target="_blank" rel="noreferrer">@dshinee0537</a>
                             </div>
                         </div>
                         
@@ -2965,7 +3431,7 @@
                             <div class="contact-box-inner">
                                 <i class="fab fa-discord"></i>
                                 <h4>Discord</h4>
-                                <a href="#">dshinee0537</a>
+                                <a href="https://discord.com/invite/lephianhdev" target="_blank" rel="noreferrer">Join Discord</a>
                             </div>
                         </div>
                     </div>
@@ -3090,9 +3556,9 @@
                 <div class="footer-logo">DShinee Dev</div>
                 <p>Creating innovative backend and AI solutions</p>
                 <div class="footer-social">
-                    <a href="https://github.com/LePhiAnhDev" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://discord.com/invite/lephianhdev"><i class="fab fa-discord"></i></a>
-                    <a href="https://t.me/lephianh386ht" target="_blank"><i class="fab fa-telegram"></i></a>
+                    <a href="https://github.com/LePhiAnhDev" target="_blank" rel="noreferrer" aria-label="Open GitHub profile"><i class="fab fa-github"></i></a>
+                    <a href="https://discord.com/invite/lephianhdev" target="_blank" rel="noreferrer" aria-label="Open Discord invite"><i class="fab fa-discord"></i></a>
+                    <a href="https://t.me/lephianh386ht" target="_blank" rel="noreferrer" aria-label="Open Telegram profile"><i class="fab fa-telegram"></i></a>
                 </div>
                 <div class="footer-links">
                     <a href="#home">Home</a>
@@ -3109,6 +3575,10 @@
         </div>
     </footer>
 
+    <a href="#home" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- AOS Animation Library -->
@@ -3121,12 +3591,13 @@
             const backToTopButton = document.querySelector('.back-to-top');
             const contactForm = document.getElementById('contact-form');
             const projectButtons = document.querySelectorAll('.project-btn');
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             
             // Custom cursor
             const cursor = document.querySelector('.custom-cursor');
             const cursorDot = document.querySelector('.cursor-dot');
             
-            if (window.innerWidth > 991) {
+            if (window.innerWidth > 991 && !prefersReducedMotion && cursor && cursorDot) {
                 document.addEventListener('mousemove', function(e) {
                     cursor.style.left = e.clientX + 'px';
                     cursor.style.top = e.clientY + 'px';
@@ -3162,7 +3633,7 @@
                 easing: 'ease-out',
                 once: true,
                 offset: 50,
-                disable: 'mobile'
+                disable: () => window.innerWidth < 768 || prefersReducedMotion
             });
             
             // Terminal Loader Animation
@@ -3180,40 +3651,44 @@
             };
             
             // Start loader animations
-            setTimeout(function() {
-                showNextLine();
-                loaderProgressBar.style.width = '100%';
-                
+            if (!loader) {
+                initPageAnimations();
+            } else if (prefersReducedMotion) {
+                loader.classList.add('fade-out');
+                initPageAnimations();
+            } else {
                 setTimeout(function() {
-                    loader.classList.add('fade-out');
+                    showNextLine();
+                    if (loaderProgressBar) {
+                        loaderProgressBar.style.width = '100%';
+                    }
                     
                     setTimeout(function() {
-                        // Initialize main page animations
-                        initPageAnimations();
-                    }, 500);
-                }, 3000);
-            }, 500);
+                        loader.classList.add('fade-out');
+                        
+                        setTimeout(function() {
+                            initPageAnimations();
+                        }, 220);
+                    }, 1400);
+                }, 180);
+            }
             
             // Main page animations
             function initPageAnimations() {
-                // Initialize GSAP and ScrollTrigger
-                initGSAPAnimations();
-                
-                // Initialize digital rain effect
-                initDigitalRain();
-                
-                // Initialize particles
-                initParticles();
-                
-                // Initialize typing effect
+                if (!prefersReducedMotion) {
+                    initGSAPAnimations();
+                    initDigitalRain();
+                    initParticles();
+                }
+
                 initTypingEffect();
-                
-                // Initialize skill bars
                 initSkillBars();
             }
             
             // Initialize GSAP animations
             function initGSAPAnimations() {
+                if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
                 // Timeline animations
                 gsap.utils.toArray('.timeline-item').forEach((item, index) => {
                     ScrollTrigger.create({
@@ -3383,6 +3858,11 @@
                 if (!typingText) return;
                 
                 const text = "Backend & AI Developer | Based in HCMC";
+                if (prefersReducedMotion) {
+                    typingText.textContent = text;
+                    return;
+                }
+
                 let i = 0;
                 
                 function typeWriter() {
@@ -3399,13 +3879,20 @@
             // Initialize skill bars
             function initSkillBars() {
                 const skillBars = document.querySelectorAll('.skill-level-bar');
-                
-                setTimeout(() => {
+
+                const applyWidths = () => {
                     skillBars.forEach(bar => {
                         const width = bar.getAttribute('data-width');
                         bar.style.width = width;
                     });
-                }, 1500);
+                };
+
+                if (prefersReducedMotion) {
+                    applyWidths();
+                    return;
+                }
+
+                setTimeout(applyWidths, 900);
             }
             
             // Navbar scroll effect
@@ -3435,19 +3922,24 @@
             // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    
-                    const target = document.querySelector(this.getAttribute('href'));
+                    const targetSelector = this.getAttribute('href');
+                    if (!targetSelector || targetSelector === '#') {
+                        return;
+                    }
+
+                    const target = document.querySelector(targetSelector);
                     if (target) {
+                        e.preventDefault();
+
                         window.scrollTo({
                             top: target.offsetTop - 70,
-                            behavior: 'smooth'
+                            behavior: prefersReducedMotion ? 'auto' : 'smooth'
                         });
                         
                         // Close navbar on mobile when clicking a link
                         const navbarToggler = document.querySelector('.navbar-toggler');
                         const navbarCollapse = document.querySelector('.navbar-collapse');
-                        if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                        if (navbarCollapse && navbarCollapse.classList.contains('show') && navbarToggler) {
                             navbarToggler.click();
                         }
                     }
@@ -3460,7 +3952,7 @@
                     e.preventDefault();
                     window.scrollTo({
                         top: 0,
-                        behavior: 'smooth'
+                        behavior: prefersReducedMotion ? 'auto' : 'smooth'
                     });
                 });
             }
@@ -3494,6 +3986,7 @@
                     // Telegram Bot details
                     const botToken = 'myBotToken'; // Your bot token
                     const chatId = 'myChatID';     // Your chat ID
+                    const hasTelegramBotConfig = botToken !== 'myBotToken' && chatId !== 'myChatID';
                     
                     // Format message for Telegram
                     const telegramMessage = 
@@ -3502,6 +3995,22 @@
                         `📧 Email: ${email}\n` +
                         `📝 Subject: ${subject}\n` +
                         `💬 Message: ${message}`;
+
+                    if (!hasTelegramBotConfig) {
+                        const fallbackText =
+                            `Hi DShinee, my name is ${name || 'Guest'}.\n\n` +
+                            `Subject: ${subject || 'Project inquiry'}\n` +
+                            `Email: ${email || 'Not provided'}\n\n` +
+                            `${message || 'I would like to connect with you about a project.'}`;
+                        const telegramUrl = `https://t.me/dshinee0537?text=${encodeURIComponent(fallbackText)}`;
+
+                        if (formStatus) {
+                            formStatus.innerHTML = '<div style="color: var(--accent-cyan); padding: 15px; border: 1px solid var(--accent-cyan); border-radius: 12px;"><i class="fas fa-paper-plane" style="margin-right: 8px;"></i>Opening Telegram with your message prefilled...</div>';
+                        }
+
+                        window.open(telegramUrl, '_blank', 'noopener,noreferrer');
+                        return;
+                    }
                         
                     // Send to Telegram
                     fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
@@ -3608,7 +4117,7 @@
             }
             
             // Initialize Three.js effects if window width > 768
-            if (window.innerWidth > 768) {
+            if (window.innerWidth > 768 && !prefersReducedMotion) {
                 setTimeout(() => {
                     initThreeJsBackground();
                 }, 4000);
